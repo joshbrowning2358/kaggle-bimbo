@@ -53,7 +53,7 @@ write.csv(out, file=paste0("data/models/test_", model, ".csv"), row.names=FALSE)
 model = "hierarchical_store"
 
 # model = lmer(Demanda_uni_equil ~ Semana + (1|Cliente_ID:Ruta_SAK:Agencia_ID) + (1|Producto_ID), data=train)
-model_cv = lmer(log(Demanda_uni_equil + 1) ~ Semana + (1|Cliente_ID), data=train[Semana != 9, ])
+model_cv = lmer(log(Demanda_uni_equil + 1) ~ Semana + (1|Cliente_ID:Ruta_SAK:Agencia_ID), data=train[Semana != 9, ])
 preds = exp(predict(model_cv, train_wk9, allow.new.levels=TRUE)) - 1
 score = rmsle(preds, train_wk9$Demanda_uni_equil)
 write.csv(preds, paste0("data/models/cv_", model, "_", score, ".csv"), row.names=FALSE)
