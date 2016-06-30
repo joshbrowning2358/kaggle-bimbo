@@ -4,7 +4,6 @@ library(Matrix)
 
 sapply(dir("~/Personal Files/Kaggle/Model Framework/Cross-Validation/crossValidation/R/", full.names = TRUE),
        source)
-source("R/error.R")
 
 cnames = fread("data/train.csv", nrow=0)
 train = fread("data/train_sample_75k.csv", col.names=colnames(cnames),
@@ -16,18 +15,19 @@ test = fread("data/test.csv", nrow=1000)
 
 model = "XGB_product_agency"
 
-X = sparse.model.matrix(Demanda_uni_equil ~ Semana + factor(Producto_ID) + factor(Agencia_ID) + 0,
-                        data=train)
-X_wk9 = sparse.model.matrix(Demanda_uni_equil ~ Semana + factor(Producto_ID) + factor(Agencia_ID) + 0,
-                            data=train_wk9)
-X_test = sparse.model.matrix(id ~ Semana + factor(Producto_ID) + factor(Agencia_ID) + 0,
-                            data=test)
-model_cv = xgboost(data=X, label=train$Demanda_uni_equil, nrounds=20)
+data = rbindlist(list(train, train_wk9, test), fill=TRUE)
+data[, dummy := 1]
+X = sparse.model.matrix(dummy ~ Semana + factor(Producto_ID) + factor(Agencia_ID) + 0,
+                        data=data)
+X_train = X[1:nrow(train), ]
+X_wk9 = X[1:nrow(train_wk9) + nrow(train), ]
+X_test = X[1:nrow(test) + nrow(train) + nrow(train_wk9), ]
+model_cv = xgboost(data=X_train, label=train$Demanda_uni_equil, nrounds=20)
 pred = predict(model_cv, X_wk9)
 score = rmsle(pred, train_wk9$Demanda_uni_equil)
 write.csv(pred, paste0("data/models/cv_", model, "_", score, ".csv"), row.names=FALSE)
 
-model_full = xgboost(data=rbind(X, X_wk9),
+model_full = xgboost(data=rbind(X_train, X_wk9),
                      label=c(train$Demanda_uni_equil, train_wk9$Demanda_uni_equil),
                      nrounds=20)
 pred = predict(model_cv, X_test)
@@ -37,17 +37,18 @@ out$id = as.character(out$id)
 write.csv(out, file=paste0("data/models/test_", model, ".csv"), row.names=FALSE)
 
 
-predModel = function(X, y){
-    xgboost(data=matrix(X), label=y, nrounds=10)
+fitModel = function(X, y){
+    xgboost(data=X, label=y, nrounds=10)
 }
-fitModel = function(model, X){
-    predict(model, matrix(X))
+predModel = function(model, X){
+    xgboost::predict(model, X)
 }
 
-crossValidation(model=list(predict=predModel, fit=fitModel),
-                xTrain = "data.table",
-                yTrain = "numeric",
-                xTest = "data.table",
-                cvIndices = "numeric",
-                validationIndices = NULL)
-    
+cv = crossValidation(model=list(predict=predModel, fit=fitModel),
+                    xTrain = rbind(X_train, X_wk9),
+                    yTrain = c(train$Demanda_uni_equil, train_wk9$Demanda_uni_equil),
+                    xTest = X_test,
+                    cvIndices = numeric(0),
+                    validationIndices = c(rep(FALSE, nrow(X_train)), rep(TRUE, nrow(X_wk9))))
+summary(cv)
+run(cv, metric=RMSLE)
