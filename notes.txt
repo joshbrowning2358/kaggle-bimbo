@@ -11,3 +11,5 @@ Things to model:
 5*. Create train matrix with additional columns: mean prior to current week (i.e. mean of weeks 3-6 if obs is week 7, ...) where the mean is computed over {individual TS, Product Type, ...}.  Fit linear regression model (can use bigmemory package or similar to update regression model if needed).
 
 *Goal: Several models with cross validated week 9 forecasts and test forecasts!
+
+Add to cross-validation R module a functionality to write to a summary document the model name, type, ... each time it is run.  That way replicability (and understanding what we've submitted!) will be easier.
