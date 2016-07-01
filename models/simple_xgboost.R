@@ -4,13 +4,16 @@ library(Matrix)
 
 sapply(dir("~/Personal Files/Kaggle/Model Framework/Cross-Validation/crossValidation/R/", full.names = TRUE),
        source)
+source("R/error.R")
 
 cnames = fread("data/train.csv", nrow=0)
-train = fread("data/train_sample_75k.csv", col.names=colnames(cnames),
+train = fread("data/train.csv", col.names=colnames(cnames),
               colClasses=c("numeric", rep("factor", 5), rep("numeric", 5)))
 train_wk9 = train[Semana == 9, ]
+# train = fread("data/train_sample_7.5M.csv", col.names=colnames(cnames),
+#               colClasses=c("numeric", rep("factor", 5), rep("numeric", 5)))
 train = train[Semana != 9, ]
-test = fread("data/test.csv", nrow=1000)
+test = fread("data/test.csv")
 
 
 model = "XGB_product_agency"
