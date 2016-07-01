@@ -2,9 +2,12 @@ Current Features:
 Demand ~ Semana + Agencia + Canal + Ruta + Cliente + Producto + Town + State + choco + multigrain + vanilla + brand + (weight + pieces + weight_per_piece){have NAs}
 
 Things to model:
-0. Hierarchical regression model
+0*. Hierarchical regression model
 1. Linear trend over time (by specific ts)
 2. LOOCV using hierarchical averages (CV by group, not week 9)
 3. LOOCV using all types of groupings (CV by group), fit linear regression to investigate optimal weightings
 (Note: 2 and 3 could be used to choose a hierarchy in 0 or to impute and fit 1)
-4. Throw it all into NB
+4*. Throw it all into NB (can easily process entire thing in memory)
+5*. Create train matrix with additional columns: mean prior to current week (i.e. mean of weeks 3-6 if obs is week 7, ...) where the mean is computed over {individual TS, Product Type, ...}.  Fit linear regression model (can use bigmemory package or similar to update regression model if needed).
+
+*Goal: Several models with cross validated week 9 forecasts and test forecasts!
