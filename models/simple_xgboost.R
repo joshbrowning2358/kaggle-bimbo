@@ -41,17 +41,23 @@ write.csv(out, file=paste0("data/models/test_", model, ".csv"), row.names=FALSE)
 
 
 fitModel = function(X, y){
+    X[, dummy := 1]
+    X = sparse.model.matrix(dummy ~ Semana + factor(Producto_ID) + factor(Agencia_ID) + 0,
+                            data=X)
     xgboost(data=X, label=y, nrounds=10)
 }
 predModel = function(model, X){
+    X[, dummy := 1]
+    X = sparse.model.matrix(dummy ~ Semana + factor(Producto_ID) + factor(Agencia_ID) + 0,
+                            data=X)
     xgboost::predict(model, X)
 }
 
 cv = crossValidation(model=list(predict=predModel, fit=fitModel),
-                    xTrain = rbind(X_train, X_wk9),
-                    yTrain = c(train$Demanda_uni_equil, train_wk9$Demanda_uni_equil),
-                    xTest = X_test,
+                    xTrain = rbind(train[Semana != 9, ], train_wk9),
+                    yTrain = c(train[Semana != 9, Demanda_uni_equil], train_wk9$Demanda_uni_equil),
+                    xTest = test,
                     cvIndices = numeric(0),
-                    validationIndices = c(rep(FALSE, nrow(X_train)), rep(TRUE, nrow(X_wk9))))
+                    validationIndices = c(rep(FALSE, nrow(X_train)), rep(TRUE, nrow(train_wk9))))
 summary(cv)
 run(cv, metric=RMSLE)
