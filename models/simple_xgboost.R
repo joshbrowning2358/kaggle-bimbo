@@ -2,7 +2,7 @@ library(data.table)
 library(xgboost)
 library(Matrix)
 
-sapply(dir("~/Personal Files/Kaggle/Model Framework/Cross-Validation/crossValidation/R/", full.names = TRUE),
+sapply(dir("~/Personal Files/Kaggle/ModelFramework/CrossValidation/crossValidation/R/", full.names = TRUE),
        source)
 source("R/error.R")
 
