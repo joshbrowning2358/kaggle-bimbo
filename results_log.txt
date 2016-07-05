@@ -1,0 +1,24 @@
+
+Environment:             R (NLRO02-PC0110)
+Model Key:               1467615472 
+File name:               hierarchical_log_means 
+Model name:              Unidentified! 
+Function call:           {
+X[, `:=`(y, as.numeric(y))]
+list(X[, list(m1 = exp(mean(log(y + 1)))), by = c("Producto_ID", "Cliente_ID", "Agencia_ID")], X[, list(m2 = exp(mean(log(y + 1)))), by = c("Producto_ID")], X[, list(m3 = exp(mean(log(y + 1))))]) 
+Execution time:          1467616370 
+Training rows:           74180464
+Testing rows:            6999251
+Cross-validation groups: 7
+
+Environment:             R (NLRO02-PC0110)
+Model Key:               1467640910 
+File name:               hierarchical_log_medians 
+Model name:              Unidentified! 
+Function call:           {
+X[, `:=`(y, as.numeric(y))]
+list(X[, list(m1 = exp(median(log(y + 1)))), by = c("Producto_ID", "Cliente_ID", "Agencia_ID")], X[, list(m2 = exp(median(log(y + 1)))), by = c("Producto_ID")], X[, list(m3 = exp(median(log(y + 1))))]) 
+Execution time:          1467645463 
+Training rows:           74180464
+Testing rows:            6999251
+Cross-validation groups: 7
