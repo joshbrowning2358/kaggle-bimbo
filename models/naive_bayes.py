@@ -3,8 +3,9 @@ import numpy as np
 from sklearn.naive_bayes import GaussianNB
 
 import os, sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname('.'), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname('.'), '..')))
 from context import CrossValidation
+from ModelFramework.CrossValidation.python.cross_validation import CrossValidation
 
 import importlib
 loader = importlib.machinery.SourceFileLoader('report', '/full/path/report/other_py_file.py')
