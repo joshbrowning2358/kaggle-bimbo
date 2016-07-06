@@ -7,8 +7,8 @@ sapply(dir("~/Personal Files/Kaggle/ModelFramework/FeatureEngineering/featureEng
 # test = fread("data/test.csv")
 
 cnames = fread("data/train.csv", nrow=0)
-train = fread("data/train_complete_sample_45k.csv", col.names=colnames(cnames))
-test = fread("data/test.csv", nrow=1000)
+train = fread("data/train_complete_sample_850k.csv", col.names=colnames(cnames))
+test = fread("data/test.csv")
 
 #######################################################################################################################
 #                                Producto Information                                                                 #
@@ -86,5 +86,5 @@ for(h in hierarchies){
 # write.csv(train, "data/train_features.csv", row.names=FALSE)
 # write.csv(test, "data/test_features.csv", row.names=FALSE)
 
-write.csv(train, "data/train_complete_45k_features.csv", row.names=FALSE)
+write.csv(train, "data/train_complete_850k_features.csv", row.names=FALSE)
 write.csv(test, "data/test_1000_features.csv", row.names=FALSE)
