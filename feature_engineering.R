@@ -3,12 +3,12 @@ library(data.table)
 sapply(dir("~/Personal Files/Kaggle/ModelFramework/FeatureEngineering/featureEngineering/R/", full.names = TRUE),
        source)
 
-train = fread("data/train.csv")
-test = fread("data/test.csv")
+# train = fread("data/train.csv")
+# test = fread("data/test.csv")
 
-# cnames = fread("data/train.csv", nrow=0)
-# train = fread("data/train_complete_sample_45k.csv", col.names=colnames(cnames))
-# test = fread("data/test.csv", nrow=1000)
+cnames = fread("data/train.csv", nrow=0)
+train = fread("data/train_complete_sample_45k.csv", col.names=colnames(cnames))
+test = fread("data/test.csv", nrow=1000)
 
 #######################################################################################################################
 #                                Producto Information                                                                 #
@@ -83,5 +83,8 @@ for(h in hierarchies){
 #                                             Output                                                                  #
 #######################################################################################################################
 
-write.csv(train, "data/train_features.csv", row.names=FALSE)
-write.csv(test, "data/test_features.csv", row.names=FALSE)
+# write.csv(train, "data/train_features.csv", row.names=FALSE)
+# write.csv(test, "data/test_features.csv", row.names=FALSE)
+
+write.csv(train, "data/train_complete_45k_features.csv", row.names=FALSE)
+write.csv(test, "data/test_1000_features.csv", row.names=FALSE)
