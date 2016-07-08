@@ -3,12 +3,12 @@ library(data.table)
 sapply(dir("~/Personal Files/Kaggle/ModelFramework/FeatureEngineering/featureEngineering/R/", full.names = TRUE),
        source)
 
-# train = fread("data/train.csv")
-# test = fread("data/test.csv")
-
-cnames = fread("data/train.csv", nrow=0)
-train = fread("data/train_complete_sample_850k.csv", col.names=colnames(cnames))
+train = fread("data/train.csv")
 test = fread("data/test.csv")
+
+# cnames = fread("data/train.csv", nrow=0)
+# train = fread("data/train_complete_sample_850k.csv", col.names=colnames(cnames))
+# test = fread("data/test.csv")
 
 #######################################################################################################################
 #                                Producto Information                                                                 #
@@ -35,6 +35,7 @@ test = merge(test, townState, by="Agencia_ID", all.x=TRUE)
 hierarchies = list(c("Producto_ID"), c("Producto_ID", "Cliente_ID", "Agencia_ID"), c("Producto_ID", "brand"),
                    c("Cliente_ID", "Agencia_ID"), c("has_choco"), c("has_choco", "Town"), c("Town", "State"),
                    c("Canal_ID"), c("brand", "has_choco"), "", c("Town", "State", "Canal_ID"), c("Town"), c("State"))
+hierarchies = list(c("Producto_ID"), c("Producto_ID", "Cliente_ID", "Agencia_ID"), "")
 for(h in hierarchies){
     semanasToModel = 3:11
     newFeature = lapply(semanasToModel, function(s){
@@ -83,8 +84,8 @@ for(h in hierarchies){
 #                                             Output                                                                  #
 #######################################################################################################################
 
-# write.csv(train, "data/train_features.csv", row.names=FALSE)
-# write.csv(test, "data/test_features.csv", row.names=FALSE)
+write.csv(train, "data/train_subset_of_features.csv", row.names=FALSE)
+write.csv(test, "data/test_subset_of_features.csv", row.names=FALSE)
 
-write.csv(train, "data/train_complete_850k_features.csv", row.names=FALSE)
-write.csv(test, "data/test_1000_features.csv", row.names=FALSE)
+# write.csv(train, "data/train_complete_850k_features.csv", row.names=FALSE)
+# write.csv(test, "data/test_1000_features.csv", row.names=FALSE)

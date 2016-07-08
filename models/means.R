@@ -5,8 +5,11 @@ sapply(dir("../Model Framework/CrossValidation/crossValidation/R/", full.names =
        source)
 source("R/error.R")
 
-train = fread("data/train.csv")
-test = fread("data/test.csv")
+# train = fread("data/train.csv")
+# test = fread("data/test.csv")
+
+train = fread("data/train_subset_of_features.csv")
+test = fread("data/test_subset_of_features.csv")
 
 # cnames = fread("data/train.csv", nrow=0)
 # train = fread("data/train_complete_sample_45k.csv", col.names=colnames(cnames))
