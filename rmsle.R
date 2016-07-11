@@ -9,12 +9,6 @@ grad_rmsle <- function(preds, actuals){
   1/(2*rmsle_value) * 1/n * 2 * (log(preds + 1) - log(actuals + 1)) * 1/(preds + 1)
 }
 
-1/(2*sqrt(1/n*sum((log(preds + 1) - log(actuals + 1))^2))) * 1/n * 2 * (log(preds + 1) - log(actuals + 1)) * 1/(preds + 1)
-
--1/(4*rmsle_value^3) * (1/n * 2 * (log(preds + 1) - log(actuals + 1)) * 1/(preds + 1))^2 +
-  1/(2*rmsle_value) * 1/n * 2 * 1/(preds + 1)^2 -
-  1/(2*rmsle_value) * 1/n * 2 * (log(preds + 1) - log(actuals + 1)) * 1/(preds + 1)^2
-
 hess_rmsle <- function(preds, actuals){
   n = length(preds)
   rmsle_value = rmsle(preds, actuals)
@@ -27,11 +21,11 @@ hess_rmsle <- function(preds, actuals){
 
 
 # Test
-preds = 1:10
-actuals = preds + 0.1*rnorm(10)
-rmsle(preds, actuals)
-grad_rmsle(preds, actuals)
-numDeriv::grad(function(preds){rmsle(preds, actuals)}, x=preds)
-hess_rmsle(preds, actuals)
-diag(numDeriv::hessian(function(preds){rmsle(preds, actuals)}, x=preds))
-numDeriv::grad(function(x){grad_rmsle(c(x, preds[2:10]), actuals)[1]}, x=preds[1])
+# preds = 1:10
+# actuals = preds + 0.1*rnorm(10)
+# rmsle(preds, actuals)
+# grad_rmsle(preds, actuals)
+# numDeriv::grad(function(preds){rmsle(preds, actuals)}, x=preds)
+# hess_rmsle(preds, actuals)
+# diag(numDeriv::hessian(function(preds){rmsle(preds, actuals)}, x=preds))
+# numDeriv::grad(function(x){grad_rmsle(c(x, preds[2:10]), actuals)[1]}, x=preds[1])

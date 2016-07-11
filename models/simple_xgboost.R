@@ -2,9 +2,9 @@ library(data.table)
 library(xgboost)
 library(Matrix)
 
-sapply(dir("~/Personal Files/Kaggle/ModelFramework/CrossValidation/crossValidation/R/", full.names = TRUE),
+sapply(dir("../ModelFramework/CrossValidation/crossValidation/R/", full.names = TRUE),
        source)
-source("R/error.R")
+source("rmsle.R")
 
 cnames = fread("data/train.csv", nrow=0)
 # train = fread("data/train.csv", col.names=colnames(cnames),
@@ -19,31 +19,21 @@ train = fread("data/train_complete_45k_features.csv")
 test = fread("data/test_1000_features.csv", nrow=1000)
 
 
-model = "XGB_product_agency"
-
-formula = dummy ~ Semana + factor(Producto_ID) + factor(Agencia_ID) + has_vanilla +
-    has_choco + pieces + weight_per_piece + factor(Town) + factor(brand) + 0
-rmsleObjective <- function(preds, dtrain) {
-  labels <- getinfo(dtrain, "label")
-  # rmsle = sqrt(1/n * sum((log(pred + 1) - log(actual + 1))^2))
-  #
-  # rmsle' = 1/(2*sqrt(1/n * sum((log(pred + 1) - log(actual + 1))^2))) * 1/(n * (pred + 1)) = grad
-  #
-  # rmsle'' = -1/(4*sqrt(1/n * sum((log(pred + 1) - log(actual + 1))^2))^3) * 1/(n * (pred + 1)) +
-  #     1/(2*sqrt(1/n * sum((log(pred + 1) - log(actual + 1))^2))) * (-n)/(n * (pred + 1))^2 = hess
-  grad <- preds - labels
-  hess <- preds * (1 - preds)
-  return(list(grad = grad, hess = hess))
-}
+formula = "target ~ Semana + factor(Producto_ID) + factor(Agencia_ID) + has_vanilla +
+    has_choco + factor(Town) + factor(brand) + 0"
 fitModel = function(X, y){
-    X[, dummy := 1]
-    X = sparse.model.matrix(formula, data=X)
-    xgboost(data=X, label=y, nrounds=10)
+    X[, target := y]
+    X = sparse.model.matrix(as.formula(formula), data=X)
+    # Objective of MSE with log(y) <=> RMSE with log(y) <=> RMLSE with y
+    xgboost(data=X, label=log(y + 1), nrounds=20)
 }
 predModel = function(model, X){
-    X[, dummy := 1]
-    X = sparse.model.matrix(formula, data=X)
-    xgboost::predict(model, X, params=list(objective)
+    X[, index := 1:.N]
+    X[, target := -9999]
+    formula = paste0(formula, "+ index")
+    X = sparse.model.matrix(as.formula(formula), data=X)
+    preds = xgboost::predict(model, X)
+    (exp(preds) - 1)[X[, colnames(X) == "index"]]
 }
 cv = crossValidation(model=list(predict=predModel, fit=fitModel),
                     xTrain = train,
