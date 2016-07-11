@@ -114,4 +114,4 @@ productoAvg = crossValidation(model=list(predict=predModel, fit=fitModel),
                               cvIndices = train[Semana != 3, Semana],
                               cvTime=TRUE)
 summary(productoAvg)
-run(productoAvg, filename="submissions/lm_means_3models", metric=rmsle, logged=TRUE)
+run(productoAvg, filename="submissions/lm_means_3models", metric=rmsle, logged=TRUE, idCol='id')

@@ -7,3 +7,13 @@ Execution time:          1467888809
 Training rows:           63015257
 Testing rows:            6999251
 Cross-validation groups: 6
+
+Environment:             R (NLRO02-PC0110)
+Model Key:               1467986776 
+File name:               submissions/lm_means_3models 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_Producto_ID + 1), data = X[is.na(x) & !is.na(mean_Producto_ID), ]) mod3 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_), data = X[is.na(x) & is.na(mean_Producto_ID), ]) 
+Execution time:          1467987689 
+Training rows:           63015257
+Testing rows:            6999251
+Cross-validation groups: 6
