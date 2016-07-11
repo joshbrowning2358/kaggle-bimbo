@@ -16,4 +16,145 @@ Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), d
 Execution time:          1467987689 
 Training rows:           63015257
 Testing rows:            6999251
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468124625 
+File name:               submissions/lm_means_3models 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_Producto_ID + 1), data = X[is.na(x) & !is.na(mean_Producto_ID), ]) mod3 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_), data = X[is.na(x) & is.na(mean_Producto_ID), ]) 
+Execution time:          1468124626 
+Cross-validtion score:   0.5014203 
+Training rows:           38504
+Testing rows:            1000
 Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468124978 
+File name:               testing_mean_Producto_ID_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468124980 
+Cross-validtion score:   0.6442478 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125070 
+File name:               testing_meanProductoIDClienteIDAgenciaID_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125071 
+Cross-validtion score:   0.5258172 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125082 
+File name:               testing_meanProductoIDbrand_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125083 
+Cross-validtion score:   0.6442478 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125085 
+File name:               testing_meanClienteIDAgenciaID_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125087 
+Cross-validtion score:   0.7072248 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125089 
+File name:               testing_meanhaschoco_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125090 
+Cross-validtion score:   0.7917492 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125092 
+File name:               testing_meanhaschocoTown_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125093 
+Cross-validtion score:   0.7493236 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125095 
+File name:               testing_meanTownState_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125097 
+Cross-validtion score:   0.7511151 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125099 
+File name:               testing_meanCanalID_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125100 
+Cross-validtion score:   0.7487468 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125101 
+File name:               testing_meanbrandhaschoco_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125103 
+Cross-validtion score:   0.7875724 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125104 
+File name:               testing_meanTownStateCanalID_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125105 
+Cross-validtion score:   0.7303103 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125105 
+File name:               testing_meanTown_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125107 
+Cross-validtion score:   0.7511151 
+Training rows:           38504
+Testing rows:            1000
+Cross-validation groups: 6
+
+Environment:             R (JOSH_LAPTOP)
+Model Key:               1468125108 
+File name:               testing_meanState_means 
+Model name:              glm 
+Function call:           mod1 = biglm(log(Demanda_uni_equil + 1) ~ log(x + 1), data = X[!is.na(x), ]) mod2 = biglm(log(Demanda_uni_equil + 1) ~ log(mean_ + 1), data = X[is.na(x), ]) 
+Execution time:          1468125110 
+Cross-validtion score:   0.7873912 
+Training rows:           38504
+Testing rows:            1000
